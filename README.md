@@ -27,7 +27,7 @@ Trained on Physically Inspired Synthetic Data"**.
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/Garankeil/FJNNet.git
-cd your-repo-name
+cd FJNNet
 ```
 
 ### 2. Install dependencies
