@@ -65,7 +65,7 @@ This project utilizes **Distributed Data Parallel (DDP)** for accelerated traini
 Run the following command to start training on 2 GPUs:
 
 ```bash
-torchrun --nproc_per_node=2 train_ddp.py \
+torchrun --nproc_per_node=2 train.py \
     --train True \
     --train-root ./data/train \
     --eval-root ./data/eval \
@@ -78,7 +78,7 @@ torchrun --nproc_per_node=2 train_ddp.py \
 To test a pre-trained model and save reconstructed results:
 
 ```bash
-torchrun --nproc_per_node=1 train_ddp.py \
+torchrun --nproc_per_node=1 train.py \
     --train False \
     --model-path ./checkpoints/best_model.pt \
     --eval-root ./data/eval
