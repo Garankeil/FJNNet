@@ -8,7 +8,7 @@ Trained on Physically Inspired Synthetic Data"**.
 ## Project Structure
 
 ```text
-├── network/                # Network architecture
+├── network/            # Network architecture
 │   ├── FJNNET.py       # Main model definition
 │   └── layers.py       # Custom layers and attention modules
 ├── dataset/            # Data loading
