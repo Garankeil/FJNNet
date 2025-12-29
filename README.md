@@ -17,7 +17,7 @@ Trained on Physically Inspired Synthetic Data"**.
 │   └── utils.py        
 ├── preprocess          # Matlab script for background correction & denoising
 │   └── preprocess.m
-├── train_ddp.py        # Main entry script (Supports Training & Evaluation)
+├── train.py        # Main entry script (Supports Training & Evaluation)
 └── requirements.txt    # Environment dependencies
 ```
 
