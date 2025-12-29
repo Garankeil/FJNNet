@@ -8,15 +8,16 @@ Trained on Physically Inspired Synthetic Data"**.
 ## Project Structure
 
 ```text
-├── net/                # Network architecture
+├── network/                # Network architecture
 │   ├── FJNNET.py       # Main model definition
 │   └── layers.py       # Custom layers and attention modules
 ├── dataset/            # Data loading
 │   └── dataset.py      
 ├── utils/              # tools
 │   └── utils.py        
+├── preprocess          # Matlab script for background correction & denoising
+│   └── preprocess.m
 ├── train_ddp.py        # Main entry script (Supports Training & Evaluation)
-├── preprocess.m        # Matlab script for background correction & denoising
 └── requirements.txt    # Environment dependencies
 ```
 
