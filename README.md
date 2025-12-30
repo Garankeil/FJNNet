@@ -33,7 +33,7 @@ To address the challenge of limited experimental datasets, we provide `datagener
 The script automatically accounts for the geometric scaling between the SLM and the Camera plane:
 - **Object Plane**: 32x32 pixels on SLM (Pitch: 116.55 µm).
 - **Image Plane**: Captured by camera (Pitch: 2.9 µm).
-- **System Magnification**: Determined by $M = v/u$ (e.g., $u=230$mm, $v=15$mm).
+- **System Magnification**: Determined by $M = v/u$
 
 ### How to use:
 1. Open MATLAB.
