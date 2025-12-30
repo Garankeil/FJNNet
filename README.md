@@ -8,6 +8,8 @@ Trained on Physically Inspired Synthetic Data"**.
 ## Project Structure
 
 ```text
+├── datagenerate/       # Data generate
+│   └── datagenerate.py      
 ├── network/            # Network architecture
 │   ├── FJNNET.py       # Main model definition
 │   └── layers.py       # Custom layers and attention modules
@@ -20,6 +22,29 @@ Trained on Physically Inspired Synthetic Data"**.
 ├── train.py            # train script (Supports Training & Evaluation use DDP)
 └── requirements.txt    # Environment dependencies
 ```
+
+---
+
+## Data Generation (Matlab)
+
+To address the challenge of limited experimental datasets, we provide `datagenerate/datagenerate.m`. This script generates synthetic speckle patterns based on the **Linear Shift-Invariant (LSI)** model within the **Optical Memory Effect (OME)** range.
+
+### Physical Parameters
+The script automatically accounts for the geometric scaling between the SLM and the Camera plane:
+- **Object Plane**: 32x32 pixels on SLM (Pitch: 116.55 µm).
+- **Image Plane**: Captured by camera (Pitch: 2.9 µm).
+- **System Magnification**: Determined by $M = v/u$ (e.g., $u=230$mm, $v=15$mm).
+
+### How to use:
+1. Open MATLAB.
+2. Run `datagenerate.m` to produce 384x384 simulated speckles.
+
+---
+
+## Preprocessing (Matlab)
+We provide `preprocess/preprocess.m` for raw data preprocessing:
+- **Background Correction**: Normalizes non-uniform illumination.
+- **Denoising**: Applies $384 \to 64 \to 384$ interpolation-based smoothing.
 
 ---
 
@@ -85,11 +110,3 @@ torchrun --nproc_per_node=1 train.py \
 ```
 *Results will be saved in `./results/recon/`.*
 
----
-
-## Preprocessing (Matlab)
-We provide `preprocess.m` for raw data preprocessing:
-- **Background Correction**: Normalizes non-uniform illumination.
-- **Denoising**: Applies $384 \to 64 \to 384$ interpolation-based smoothing.
-
----
