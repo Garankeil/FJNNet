@@ -95,4 +95,5 @@ end
 
 function out = maxnorm(in)
     out = (in - min(in(:))) / (max(in(:)) - min(in(:)) + eps);
+
 end
