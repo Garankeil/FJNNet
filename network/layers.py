@@ -64,21 +64,22 @@ class EncoderBlock(nn.Module):
 class DecoderBlock(nn.Module):
     def __init__(self, channel, bridgeflag: bool = False):
         super(DecoderBlock, self).__init__()
-        self.conv1_1 = BasicConv(channel, channel*2, kernel_size=3, stride=1, norm=False, relu=True)
-        self.conv1_2 = BasicConv(channel*2, channel, kernel_size=3, stride=1, norm=False, relu=False)
-        self.conv2_1 = BasicConv(channel, channel, kernel_size=3, stride=1, norm=False, relu=True)
-        self.conv2_2 = BasicConv(channel*2, channel, kernel_size=3, stride=1, norm=False, relu=False)
-        self.conv_en1 = BasicConv(channel, channel*2, kernel_size=3, stride=1, norm=False, relu=True)
-        self.conv_de1 = BasicConv(channel, channel*2, kernel_size=3, stride=1, norm=False, relu=True)
-        self.conv_en2 = BasicConv(channel*2, channel, kernel_size=3, stride=1, norm=False, relu=False)
-        self.conv_de2 = BasicConv(channel*2, channel, kernel_size=3, stride=1, norm=False, relu=False)
-        self.merge = BasicConv(channel * 2, channel, kernel_size=3, stride=1, norm=False, relu=False)
-        self.convout = nn.Conv2d(channel, 1, kernel_size=1, stride=1)
+        self.bridgeflag = bridgeflag
         self.cubic_7 = cubic_attention(channel // 2, group=1, kernel=7)
         self.cubic_13 = cubic_attention(channel // 2, group=1, kernel=13)
         self.global_att = GlobalPoolStripAttention(channel)
-        self.bridgeflag = bridgeflag
         self.norm1 = nn.BatchNorm2d(channel)
+
+        if self.bridgeflag：
+            self.conv1_1 = BasicConv(channel, channel*2, kernel_size=3, stride=1, norm=False, relu=True)
+            self.conv1_2 = BasicConv(channel*2, channel, kernel_size=3, stride=1, norm=False, relu=False)
+            self.conv2_1 = BasicConv(channel, channel, kernel_size=3, stride=1, norm=False, relu=True)
+        else:
+            self.conv_en1 = BasicConv(channel, channel*2, kernel_size=3, stride=1, norm=False, relu=True)
+            self.conv_de1 = BasicConv(channel, channel*2, kernel_size=3, stride=1, norm=False, relu=True)
+            self.conv_en2 = BasicConv(channel*2, channel, kernel_size=3, stride=1, norm=False, relu=False)
+            self.conv_de2 = BasicConv(channel*2, channel, kernel_size=3, stride=1, norm=False, relu=False)
+            self.merge = BasicConv(channel * 2, channel, kernel_size=3, stride=1, norm=False, relu=False)
 
     def forward(self, x):
         if self.bridgeflag:
@@ -117,9 +118,6 @@ class DecoderBlock2(nn.Module):
     def __init__(self, channel):
         super(DecoderBlock2, self).__init__()
         self.conv1 = BasicConv(channel, channel, kernel_size=3, stride=1, norm=False, relu=True)
-        self.conv2 = BasicConv(channel*2, channel, kernel_size=3, stride=1, norm=False, relu=True)
-        self.conv_ac = BasicConv(channel, channel, kernel_size=3, stride=1, norm=False, relu=True)
-        self.conv_out = BasicConv(channel, 1, kernel_size=3, stride=1, norm=False, relu=True)
         self.norm1 = nn.BatchNorm2d(channel)
         self.relu = nn.ReLU()
 
