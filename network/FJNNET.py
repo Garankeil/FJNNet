@@ -66,24 +66,6 @@ class FJNNet(nn.Module):
             BasicConv(base_channel // 2, 1, kernel_size=3, norm=True, relu=True, stride=1),
         ])
 
-        self.Convs = nn.ModuleList([
-            BasicConv(base_channel * 8, base_channel * 4, kernel_size=1, relu=True, stride=1),
-            BasicConv(base_channel * 4, base_channel * 2, kernel_size=1, relu=True, stride=1),
-            BasicConv(base_channel * 2, base_channel, kernel_size=1, relu=True, stride=1),
-        ])
-
-        self.ac_convs = nn.ModuleList([
-            BasicConv(1, base_channel, kernel_size=1, relu=True, stride=1),
-            BasicConv(base_channel, base_channel * 2, kernel_size=1, relu=True, stride=1),
-            BasicConv(base_channel * 2, base_channel * 4, kernel_size=1, relu=True, stride=1),
-            BasicConv(base_channel * 4, base_channel * 8, kernel_size=1, relu=True, stride=1),
-        ])
-
-        self.ConvsOut = nn.ModuleList([
-            BasicConv(base_channel * 4, 1, kernel_size=3, relu=False, stride=1),
-            BasicConv(base_channel * 2, 1, kernel_size=3, relu=False, stride=1),
-        ])
-
         self.merge8 = Merge(base_channel * 8)
         self.SCM8 = SCM(base_channel * 8)
         self.merge4 = Merge(base_channel * 4)
